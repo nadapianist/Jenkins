@@ -13,10 +13,11 @@ def main():
     # Configure MLflow experiment
     experiment_name = "churn_prediction_pipeline"
     mlflow.set_experiment(experiment_name)
-
+    train_data = pd.read_csv('//wsl.localhost/Ubuntu-22.04/home/nada/ml_project/Jenkins/churn-bigml-80.csv')
+    test_data = pd.read_csv('//wsl.localhost/Ubuntu-22.04/home/nada/ml_project/Jenkins/churn-bigml-0.csv')
     # Configurer le logging
     logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
-
+     
     # Argument parser
     parser = argparse.ArgumentParser(description="Pipeline de Machine Learning pour la prédiction du churn.")
     parser.add_argument("--prepare", action="store_true", help="Préparer les données.")
