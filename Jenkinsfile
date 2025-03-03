@@ -11,7 +11,7 @@ pipeline {
             steps {
                 script {
                     echo "🔄 Preparing data..."
-                    sh "python main.py --train_path churn-bigml-80.csv --test_path churn-bigml-20.csv --train --evaluate"
+                    "python main.py --train_path churn-bigml-80.csv --test_path churn-bigml-20.csv --train --evaluate"
                 }
             }
         }
@@ -25,7 +25,7 @@ pipeline {
             steps {
                 script {
                     echo "📊 Evaluating model..."
-                    sh "python main.py --train_path churn-bigml-80.csv --test_path churn-bigml-20.csv --load model.pkl --evaluate"
+                    "python main.py --train_path churn-bigml-80.csv --test_path churn-bigml-20.csv --load model.pkl --evaluate"
                 }
             }
         }
@@ -39,7 +39,7 @@ pipeline {
             steps {
                 script {
                     echo "📥 Loading model..."
-                    sh "python main.py --train_path churn-bigml-80.csv --test_path churn-bigml-20.csv --train --evaluate --save model.pkl"
+                    "python main.py --train_path churn-bigml-80.csv --test_path churn-bigml-20.csv --train --evaluate --save model.pkl"
                 }
             }
         }
