@@ -16,9 +16,9 @@ def main():
     # Configure MLflow experiment
     experiment_name = "churn_prediction_pipeline"
     mlflow.set_experiment(experiment_name)
-    train_data = pd.read_csv('/var/lib/jenkins/workspace/SecondPipeline/churn-bigml-80.csv')
+    train_data = pd.read_csv('/home/nada//ml_project/churn-bigml-80.csv')
 
-    test_data = pd.read_csv('/var/lib/jenkins/workspace/SecondPipeline/churn-bigml-0.csv')
+    test_data = pd.read_csv('/home/nada//ml_project/churn-bigml-20.csv')
     # Configurer le logging
     logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
      
