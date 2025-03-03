@@ -7,6 +7,15 @@ pipeline {
     }
 
     stages {
+        stage('Install Dependencies') {
+            steps {
+                script {
+                    echo "🔄 Installing dependencies..."
+                    sh "pip3 install mlflow"
+                }
+            }
+        }
+
         stage('Prepare Data') {
             steps {
                 script {
