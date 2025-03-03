@@ -4,8 +4,10 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                checkout scm  // Checkout the repository
-            }
+                echo 'Pulling...';
+                git branch: 'main',
+                url :'
+}
         }
 
         stage('Build') {
