@@ -19,9 +19,7 @@ pipeline {
     
 
         stage('Evaluate Model') {
-            when {
-                expression { return params.EVALUATE }
-            }
+            
             steps {
                 script {
                     echo "📊 Evaluating model..."
