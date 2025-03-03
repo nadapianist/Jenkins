@@ -1,55 +1,32 @@
 pipeline {
     agent any
 
-    environment {
-        MLFLOW_TRACKING_URI = "sqlite:///mlflow.db"
-    }
-
     stages {
-        stage('Checkout Code') {
+        stage('Checkout') {
             steps {
-                git 'https://your-repo-url.git'  // Replace with your actual repo URL
+                checkout scm  // Checkout the repository
             }
         }
 
-        stage('Set Up Environment') {
+        stage('Build') {
             steps {
-                sh 'python -m venv venv'
-                sh 'source venv/bin/activate && pip install -r requirements.txt'
+                echo 'Building project...'
+                // Add your build steps here
             }
         }
 
-        stage('Prepare Data') {
+        stage('Test') {
             steps {
-                sh 'source venv/bin/activate && python main.py --prepare --train_path=data/train.csv --test_path=data/test.csv'
+                echo 'Running tests...'
+                // Add your test steps here
             }
         }
 
-        stage('Train Model') {
+        stage('Deploy') {
             steps {
-                sh 'source venv/bin/activate && python main.py --train --train_path=data/train.csv --test_path=data/test.csv'
+                echo 'Deploying project...'
+                // Add your deploy steps here
             }
-        }
-
-        stage('Evaluate Model') {
-            steps {
-                sh 'source venv/bin/activate && python main.py --evaluate --train_path=data/train.csv --test_path=data/test.csv'
-            }
-        }
-
-        stage('Save Model') {
-            steps {
-                sh 'source venv/bin/activate && python main.py --save model.pkl --train_path=data/train.csv --test_path=data/test.csv'
-            }
-        }
-    }
-
-    post {
-        success {
-            echo '✅ Pipeline completed successfully!'
-        }
-        failure {
-            echo '❌ Pipeline failed! Check logs for details.'
         }
     }
 }
