@@ -16,17 +16,7 @@ pipeline {
             }
         }
 
-        stage('Train Model') {
-            when {
-                expression { return params.TRAIN }
-            }
-            steps {
-                script {
-                    echo "🚀 Training model..."
-                    sh "python model_pipeline.py --train --train_path ${params.TRAIN_PATH} --test_path ${params.TEST_PATH}"
-                }
-            }
-        }
+    
 
         stage('Evaluate Model') {
             when {
@@ -35,22 +25,12 @@ pipeline {
             steps {
                 script {
                     echo "📊 Evaluating model..."
-                    sh "python model_pipeline.py --evaluate --train_path ${params.TRAIN_PATH} --test_path ${params.TEST_PATH}"
+                    sh "python main.py --train_path churn-bigml-80.csv --test_path churn-bigml-20.csv --load model.pkl --evaluate"
                 }
             }
         }
 
-        stage('Save Model') {
-            when {
-                expression { return params.SAVE }
-            }
-            steps {
-                script {
-                    echo "💾 Saving model..."
-                    sh "python model_pipeline.py --save 'model_output.pkl' --train_path ${params.TRAIN_PATH} --test_path ${params.TEST_PATH}"
-                }
-            }
-        }
+
 
         stage('Load Model') {
             when {
@@ -59,7 +39,7 @@ pipeline {
             steps {
                 script {
                     echo "📥 Loading model..."
-                    sh "python model_pipeline.py --load 'model_output.pkl' --train_path ${params.TRAIN_PATH} --test_path ${params.TEST_PATH}"
+                    sh "python main.py --train_path churn-bigml-80.csv --test_path churn-bigml-20.csv --train --evaluate --save model.pkl"
                 }
             }
         }
