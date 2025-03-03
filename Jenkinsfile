@@ -11,7 +11,7 @@ pipeline {
             steps {
                 script {
                     echo "🔄 Preparing data..."
-                    sh "python model_pipeline.py --prepare --train_path ${params.TRAIN_PATH} --test_path ${params.TEST_PATH}"
+                    sh "python main.py --train_path churn-bigml-80.csv --test_path churn-bigml-20.csv --train --evaluate"
                 }
             }
         }
